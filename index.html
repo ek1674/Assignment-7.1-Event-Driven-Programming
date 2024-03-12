@@ -1,0 +1,84 @@
+<!-- Author: Ethan Kromschroeder -->
+<!-- Date: 2/25/2024 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Index</h1>
+    </header>
+
+    <nav>
+        <h2>Navigation</h2>
+        <div id="buttons">
+            <button id="startButton" onclick="startMoving()">Start</button>
+            <button id="stopButton" onclick="stopMoving()">Stop</button>
+        </div>
+        <a href="./index.html">Home</a>
+        <a href="./boards.html">Boards</a>
+    </nav>
+
+    <footer>
+        University of Advancing Technology<br>
+        2625 W Baseline Rd<br>
+        Tempe, AZ, 85283<br>
+        Ethan Kromschroeder<br>
+    </footer>
+
+    <img id="CSCmeme" src="CSCmeme.png" alt="Fun Meme">
+
+    <script>
+        // JavaScript for moving the image
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const memeImage = document.getElementById('CSCmeme');
+
+        let intervalId;
+        let isMoving = false;
+
+        function startMoving() {
+            if (!isMoving) {
+                intervalId = setInterval(moveImage, 2000);
+                isMoving = true;
+                startButton.disabled = true;
+                stopButton.disabled = false;
+            }
+        }
+
+        function stopMoving() {
+            clearInterval(intervalId);
+            isMoving = false;
+            startButton.disabled = false;
+            stopButton.disabled = true;
+        }
+
+        function moveImage() {
+            const maxX = window.innerWidth - memeImage.clientWidth;
+            const maxY = window.innerHeight - memeImage.clientHeight;
+
+            let randomX = Math.random() * maxX;
+            let randomY = Math.random() * maxY;
+
+            randomX = Math.min(randomX, maxX - 20);
+            randomY = Math.min(randomY, maxY - 20);
+
+            let randomSize = Math.floor(Math.random() * 200) + 50;
+            memeImage.style.width = `${randomSize}px`;
+            memeImage.style.height = `${randomSize}px`;
+
+            memeImage.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+    </script>
+
+</body>
+
+</html>
